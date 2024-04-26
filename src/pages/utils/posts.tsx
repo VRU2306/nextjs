@@ -18,7 +18,7 @@ export async function getBlogPosts() {
       id:matterResult.data.id,
       date: matterResult.data.date,
       image:matterResult.data.image,
-      link:`posts/${matterResult.data.id}`,
+      link:`posts/${matterResult.data.title}`,
       description:matterResult.data.description,
       data:matterResult
     };
@@ -30,7 +30,6 @@ export async function getBlogPosts() {
 
 export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `post${id}.md`);
-  console.log(fullPath,33)
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   // Use gray-matter to parse the post metadata section
@@ -46,6 +45,7 @@ export async function getPostData(id: string) {
       id,
       title: matterResult.data.title,
       date: matterResult.data.date,
+      image:matterResult.data.image,
       contentHtml,
   }
 
