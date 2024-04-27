@@ -34,6 +34,7 @@ export default SingleBlog;
 
 export async function generateStaticParams() {
     const posts = await getBlogPosts()
+    console.log(posts,37)
     return posts.map((post: any) => ({
         postId: post.link
     }))
