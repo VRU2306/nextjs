@@ -8,17 +8,19 @@ function CreateBlog() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [imageUrl, setImageUrl] = useState('');
-
+    const [results, setResults] = useState('');
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
-            let date=new Date()
-            await axios.post('/api/add-blogs', { title, content, imageUrl,date });
+            setResults('')
+            let date = new Date()
+            await axios.post('/api/add-blogs', { title, content, imageUrl, date });
             console.log('Blog post created successfully');
             setTitle('');
             setContent('');
             setImageUrl('');
+            setResults('Blog post created successfully')
         } catch (error) {
             console.error('Error creating blog post:', error);
         }
@@ -60,6 +62,11 @@ function CreateBlog() {
                 </div>
                 <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
             </form>
+
+            {results &&
+                <>
+                <div className="text-green-800 flex justify-center">{results}</div>
+                </>}
         </div>
 
     </>
