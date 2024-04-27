@@ -1,7 +1,7 @@
 ---
 title: ewr
 description: werwerwerwerwerwer
-date: undefined
+date: '2024-04-27'
 id: 6
 image: https://source.unsplash.com/random/?earth
 ---
