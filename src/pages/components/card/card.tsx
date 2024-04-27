@@ -1,13 +1,18 @@
 import { getBlogPosts } from "../../utils/posts";
 import Pagination from "../pagination/pagination";
 
-export default async function Card({ pageNumber }: any) {
-    const posts = await getBlogPosts();
+export const getStaticProps  = (async (context:any) => {
+    const posts = await getBlogPosts()
+    console.log(context,posts,6)
+    return { props: { posts } }
+  })
+export default async function Card({pageNumber }:any) {
+    const posts = await getBlogPosts()
     const postsPerPage = 2;
-    const totalPages = Math.ceil(posts.length / postsPerPage);
+    const totalPages = Math.ceil(posts?.length / postsPerPage);
     const indexOfLastPost = pageNumber * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
     return <>
         <div className="w-full flex flex-col justify-center sm:flex-row">
             {currentPosts?.map((post: any, index: any) => (
